@@ -1,0 +1,59 @@
+<div class="row">
+	<div class="col-md-3">
+		<button class="btn btn-primary" ng-click="addTaskButtonClicked()">Add new task</button>	
+	</div>
+	<div class="col-md-3">
+		<h3>Your TODO List</h3>
+	</div>
+</div>
+<hr />
+<div class="row" id="filters" >
+	<div class="col-md-2 filter">
+		<span class="pointer" ng-class="{'filter-selected': currentFilter=='All'}" ng-click="changeFilter('All')">All</span>
+	</div>
+	<div class="col-md-2 filter">
+		<span class="pointer" ng-class="{'filter-selected': currentFilter=='Pending'}" ng-click="changeFilter('Pending')">Pending</span>
+	</div>
+	<div class="col-md-2 filter">
+		<span class="pointer" ng-class="{'filter-selected': currentFilter=='Completed'}" ng-click="changeFilter('Completed')">Completed</span>
+	</div>
+	<div class="col-md-2 filter">
+		<span class="pointer" ng-click="removeCompleted()">Clear Completed</span>
+	</div>
+	<div class="col-md-2">
+		<label>Sort By Date: </label>
+		<input type="checkbox" ng-click="sortByDate()" data-model="sortbyDate">
+	</div>
+</div>
+<hr />
+<div class="row" style="font-weight:600;" >
+	<div class="col-md-1"></div>
+	<div class="col-md-4 text-center">TASK</div>
+	<div class="col-md-2">END TIME</div>
+	<div class="col-md-2">STATUS</div>
+	<div class="col-md-1">EDIT</div>
+</div>
+
+<br>
+<!-- style="padding: 5px 5px 5px 5px; text-align:center;" -->
+<div class="row text-center" ng-hide="taskData && taskData.length">
+	No tasks added !
+</div>
+<div class="row each-task" ng-repeat="task in taskData | filterByStatus: currentFilter track by $index " > 
+	<div class="col-md-1">
+		<input class="toggle" type="checkbox" ng-model="task.completed" ng-change="toggleCompleted(task, $index)">
+	</div>
+	<div class="col-md-4 text-center" ng-class="{'task-completed': task.completed}">{{ task.taskTitle }}</div>
+	<div class="col-md-2">{{ task.endDate | date:'MM/dd/yyyy @ h:mma' }}</div>
+	<div class="col-md-2">{{ task.status }}</div>
+	<div class="col-md-1" ng-hide="task.completed">
+		<button ng-click="showEditPage($index)" class="btn btn-warning" style="margin-top:-5px;">Edit</button>
+	</div>
+	<div class="col-md-1" ng-show="task.completed">
+		<button class="btn btn-warning disabled" style="margin-top:-5px;">Edit</button>
+	</div>
+	<div class="col-md-1" ng-click="removeItem($index)">
+		<button class="btn btn-danger" style="margin-top:-5px;">Delete</button>
+	</div>
+</div>
+

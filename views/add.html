@@ -1,0 +1,36 @@
+<form ng-submit="submit()" ng-controller="FormController" class="form-horizontal">
+	
+	<h4>{{formData ? 'Update' : 'Add'}} your task: </h4>
+	<hr/>
+	<div class="row" ng-show="showMessage">
+		<h4 id="error_message" class="list-group-item list-group-item-danger">
+			End datetime can not be less than current time.</h4>
+	</div>
+	<div class="row form-group">
+		<div class="col-sm-2">
+			Task:
+		</div>
+		<div class="col-sm-4">
+			 <textarea class="form-control" placeholder="What do you want to add ? (max 140 characters)" ng-trim="false" maxlength="140" required  ng-model="title" required>
+             </textarea>
+		</div>
+	</div>
+
+	<div class="row form-group">
+		<div class="col-sm-2">
+			Ends at:
+		</div>
+		<div class="col-sm-4">
+			<datetimepicker min-date="minDate" show-weeks="showWeeks" hour-step="hourStep" minute-step="minuteStep" ng-model="dateEnd" show-meridian="showMeridian" date-format="dd-MMM-yyyy" date-options="dateOptions" date-disabled="disabled(date, mode)" readonly-time="false">
+			</datetimepicker>
+   		</div>
+	</div>
+	
+	<div class="row form-group">
+		<div class="col-sm-offset-2 col-sm-2">
+			<button type="submit" class="btn btn-success text-center">
+				{{formData ? 'Update' : 'Add'}}
+			</button>
+		</div>
+	</div>
+</form>

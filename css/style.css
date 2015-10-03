@@ -1,0 +1,15 @@
+.task-completed{
+	text-decoration: line-through;
+}
+.each-task{
+	padding: 20px 0px;
+}
+.pointer{
+	cursor: pointer;
+}
+#filters  .filter{
+	color: blue;
+}
+#filters .filter-selected{
+	color: red;
+}
